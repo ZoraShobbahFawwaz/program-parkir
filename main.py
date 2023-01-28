@@ -147,28 +147,35 @@ def update():
     
     data = cari_data(usr_option)
     data = data.split(",")
-    jeniskendaraan = data[0]
-    jeniskendaraan = jeniskendaraan.replace(" ","")
-    platnomor = data[1]
-    platnomor = platnomor.replace(" ","")
-    waktu = data[2]
-    waktu = waktu.replace(" ","")
+    jenis_kendaraan = data[0]
+    plat_kendaraan = data[1]
+    waktu = data[2].replace("\n", "")
+
+    os.system("clear")
+    print("="*26)
+    print(f"Jenis Kendaraan : {jenis_kendaraan}")
+    print(f"Plat Nomor      : {plat_kendaraan}")
+    print(f"waktu           : {waktu}")
+    print("="*26)
 
     print("Pilih Data Yang Ingin Di Update\n1. Jenis Kendaraan\n2. Plat Nomor")
     opsi_update = input("Pilihan [1,2]\t: ")
 
     match opsi_update:
-        case "1" : jeniskendaraan = input("Masukkan Jenis Kendaraan\t: ")
+        case "1" : jenis_kendaraan = input("Masukkan Jenis Kendaraan\t: ")
         case "2" : platnomor = input("Masukkan Nomor PLat\t:")
 
-    data_str = f"{jeniskendaraan + ' '*20},{platnomor + ' '*20},{waktu + ' '*20}\n"
+    database = TEMPLATE.copy()
 
-    pjng_data = len(data_str * (usr_option - 1))
-    print(pjng_data)
+    database["jenis"] = jenis_kendaraan + TEMPLATE["jenis"][len(jenis_kendaraan):]
+    database["nopol"] = plat_kendaraan + TEMPLATE["nopol"][len(plat_kendaraan):]
+    database["waktu"] = waktu
+
+    data = f'{database["jenis"]},{database["nopol"]},{database["waktu"]}\n'
 
     with open("data.txt","r+",encoding="utf-8") as file:
-        file.seek(pjng_data*(usr_option-1))
-        file.write(data_str)
+        file.seek(len(data) * (usr_option - 1))
+        file.write(data)
 
 ## Program dimulai
 while True:
@@ -182,6 +189,6 @@ while True:
         case "2" : read_data()
         case "3" : cek_harga()
         case "4" : sorting()
-        case "5" : pass
+        case "5" : update()
         case "6" : pass
         case "7" : exit()
