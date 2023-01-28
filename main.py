@@ -115,8 +115,7 @@ def sorting():
     with open("data.txt","r") as file:
         data = file.readlines()
         data_tuple = [tuple(line.strip().split(',')) for line in data]
-        data_sort = sorted(data_tuple, key=lambda x: x[1])
-
+        data_sort = sorted(data_tuple, key=lambda x: int(x[1]))
 
         no = "No"
         jenis = "Jenis Kendaraan"
@@ -132,7 +131,7 @@ def sorting():
         for index,content in enumerate(data_sort):
             jenis = content[0]
             nopol = content[1]
-            waktutgl = konten[2].replace("\n","")
+            waktutgl = content[2].replace("\n","")
 
             print(f"{index+1:2} | {nopol:.10} | {jenis:.15} | {waktutgl:.20}\n", end="")    
 
