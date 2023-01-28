@@ -18,6 +18,7 @@ def view_menu():
     print("4. Sort Data")
     print("5. Update Data")
     print("6. Delete Data")
+    print("7. Keluar")
 
 ## fungsi untuk membuat data
 def create_data():
@@ -177,6 +178,35 @@ def update():
         file.seek(len(data) * (usr_option - 1))
         file.write(data)
 
+## Fungsi untuk delete data
+def delete_data():
+    read_data()
+    index = int(input("Masukkan nomor data yang ignin dihapus : "))
+
+    data = cari_data(index)
+    data = data.split(",")
+    jenis_kendaraan = data[0]
+    plat_kendaraan = data[1]
+    waktu = data[2].replace("\n", "")
+
+    os.system("clear")
+    print("="*26)
+    print(f"Jenis Kendaraan : {jenis_kendaraan}")
+    print(f"Plat Nomor      : {plat_kendaraan}")
+    print(f"waktu           : {waktu}")
+    print("="*26)
+
+    opsi = input("Yakin Igin Di Hapus (y/n): ")
+    if opsi == "y" or opsi == "Y":
+        with open("data.txt","r") as file:
+            data = file.readlines()
+            
+            with open("data.txt","w") as file_out:
+                for baris,content in enumerate(data):
+                    if baris != index-1:
+                        print(content)
+                        file_out.write(content)                    
+
 ## Program dimulai
 while True:
     os.system("cls")
@@ -190,5 +220,5 @@ while True:
         case "3" : cek_harga()
         case "4" : sorting()
         case "5" : update()
-        case "6" : pass
+        case "6" : delete_data()
         case "7" : exit()
