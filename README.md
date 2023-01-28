@@ -1,0 +1,1 @@
+Nama : zora zobbah fawwaz Nim : 11022200
