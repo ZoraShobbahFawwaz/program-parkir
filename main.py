@@ -99,13 +99,13 @@ def cek_harga():
         os.system("clear")
         print("="*30)
         print(f"Lama Parkir    : {total_waktu}")
-        print(f"Tagihan Parkir : Rp 1.000.000")
+        print(f"Tagihan Parkir : Rp 1.000")
         print("="*30)
     elif total_waktu <= 60 and jenis in ["motor","sepeda"]:
         os.system("clear")
         print("="*30)
         print(f"Lama Parkir    : {total_waktu}")
-        print(f"Tagihan Parkir : Rp 2.000.000") 
+        print(f"Tagihan Parkir : Rp 2.000") 
         print("="*30)
 
     a = input((""))
